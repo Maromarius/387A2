@@ -5,6 +5,8 @@ public class UnitOfWork {
 	
 	private HashMap<Integer, Integer> info = new HashMap<Integer, Integer>();//Contains Information
 
+	public UnitOfWork(){
+	}
 	public void registerNew(int pid)
 	{
 		if(info.containsKey(pid))

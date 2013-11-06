@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
 
+package com.assignment2.model;
 import java.util.HashMap;
 import java.util.Map;
+import com.assignment2.controller.*;
 
 
 /**
@@ -37,6 +38,7 @@ public class PeopleContainer {
     public void UpdatePerson(int pid, Person newPerson)
     {
         peopleList.remove(pid);
+        
         peopleList.put(pid, newPerson);
     }
     
