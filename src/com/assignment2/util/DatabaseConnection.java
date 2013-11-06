@@ -1,4 +1,7 @@
 package com.assignment2.util;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,8 +31,17 @@ public class DatabaseConnection
 	{
 		Connection connection = null;
 		// SSH CONNECTION SETTINGS TO LOG IN TO CONCORDIA
-		String sshUser = ""; // ENCS LOGIN USERNAME
-		String sshPassword = ""; // ENCS LOGIN PASSWORD
+		Properties prop = new Properties();
+        InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream("encs.properties");
+        try 
+        {
+			prop.load(inputStream);
+		} catch (IOException e2) 
+		{
+			e2.printStackTrace();
+		}
+		String sshUser = prop.getProperty("encs_username"); // ENCS LOGIN USERNAME
+		String sshPassword = prop.getProperty("encs_password"); // ENCS LOGIN PASSWORD
 		String sshHost = "login.encs.concordia.ca"; 
 		int nSshPort = 22; // remote SSH host port number
 		String strRemoteHost = "clipper.encs.concordia.ca"; // Host-name of database server
