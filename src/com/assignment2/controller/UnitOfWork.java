@@ -3,8 +3,8 @@ import java.util.*;
 
 public class UnitOfWork {
 	
-	private HashMap<Integer, Integer> info = new HashMap<Integer, Integer>();
-	
+	private HashMap<Integer, Integer> info = new HashMap<Integer, Integer>();//Contains Information
+
 	public void registerNew(int pid)
 	{
 		if(info.containsKey(pid))
@@ -35,45 +35,26 @@ public class UnitOfWork {
 			info.put(pid, 3);
 	}
 	
-	public void registerClean(Person prs)
-	{
-		if(prs.getId() == null)
-			return;
-	}
-	
 	public void commit()
 	{
-		insertNew();
-		updateDirty();
-		deleteRemoved();
-	}
-	
-	public void insertNew()
-	{
-		for(Iterator objects = newObjects.iterator(); objects.hasNext();)
+		//Iterates through the HashMap
+		Iterator it = info.entrySet().iterator();
+		while(it.hasNext())
 		{
-			Person prs = (Person) objects.next();
-			//TODO Create New Person on DB
+			Map.Entry pair = (Map.Entry)it.next();
+			//Produces the Operations for the DB with the ID's
+			if((int)pair.getValue()==1)
+			{
+				//CREATE NEW ENTRY ON DB pair.getKey()
+			}
+			if((int)pair.getValue()==2)
+			{
+				//UPDATE ON DB pair.getKey()
+			}
+			if((int)pair.getValue()==3)
+			{
+				//DELETE ON DB pair.getKey()
+			}
 		}
 	}
-	
-	public void updateDirty()
-	{
-		for(Iterator objects = dirtyObjects.iterator(); objects.hasNext();)
-		{
-			Person prs = (Person) objects.next();
-			// TODO Update Person on DB
-		}
-	}
-	
-	public void deleteRemoved()
-	{
-		for(Iterator objects = removedObjects.iterator(); objects.hasNext();)
-		{
-			Person prs = (Person) objects.next();
-			//TODO Delete Person on DB
-		}
-	}
-	
-
 }
