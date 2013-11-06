@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.assignment2.model.PeopleContainer;
 
 /**
  * Servlet implementation class PersonController
@@ -14,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 public class PersonController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UnitOfWork UOW;
+    private PeopleContainer personList;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public PersonController() {
         super();
+        personList = new PeopleContainer();
+        UOW = new UnitOfWork();
         // TODO Auto-generated constructor stub
     }
 

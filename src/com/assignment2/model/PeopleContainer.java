@@ -35,6 +35,11 @@ public class PeopleContainer {
         return peopleList.get(pid);
     }
     
+    public void RemovePerson(int pid)
+    {
+    	peopleList.remove(pid);
+    }
+    
     public void UpdatePerson(int pid, Person newPerson)
     {
         peopleList.remove(pid);

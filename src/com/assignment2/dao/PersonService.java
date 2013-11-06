@@ -4,8 +4,14 @@
  */
 package com.assignment2.dao;
 
+import java.sql.Connection;
+import com.assignment2.util.DatabaseConnection;
 import com.assignment2.model.PeopleContainer;
 import com.assignment2.model.Person;
+
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,27 +19,13 @@ import com.assignment2.model.Person;
  */
 public class PersonService 
 {
-    private boolean isConnected;
     private PeopleContainer peopleContainer;
     
     public PersonService()
     {
-        isConnected = false;
         peopleContainer = new PeopleContainer();
     }
-    
-    public boolean Connect()
-    {
-        isConnected = true; //db attempt connection;
-        if(isConnected)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+   
     
     public PeopleContainer PopulateFirstLastNamesContainer()
     {
@@ -42,30 +34,27 @@ public class PersonService
         
     }
     
-    private void populateFirstNameLastNames()
+    private void getAllFirstLastNamesIds()
     {
-        if(isConnected)
-        {
-            //get all id, firstname and lastname from db
-            
-            Person person = new Person();
-            person.setFirstName(null);
-            person.setLastName(null);
-            person.setpId(-1);
-            peopleContainer.AddPerson(person);
-        }
+        //get all id, firstname and lastname from db
+        HashMap<Integer,Person> personList = new HashMap<Integer,Person>();
+        
+        
+        //Connect to db and get lists
+        Person person = new Person();
+        person.setFirstName(null);
+        person.setLastName(null);
+        person.setpId(-1);
+        peopleContainer.AddPerson(person);
     }
     private void getAllPersonInfo(int pid)
     {
-        if(isConnected)
-        {
-            Person person = peopleContainer.GetPerson(pid);
-            //get remaining info from db.
-            person.setAddress(null);
-            person.setPhoneNumber(null);
-            //update peopleContainer
-            peopleContainer.UpdatePerson(pid, person);
-        }
+        Person person = peopleContainer.GetPerson(pid);
+        //get remaining info from db.
+        person.setAddress(null);
+        person.setPhoneNumber(null);
+        //update peopleContainer
+        peopleContainer.UpdatePerson(pid, person);
     }
     
     public boolean UpdatePerson(Person p)

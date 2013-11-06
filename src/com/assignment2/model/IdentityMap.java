@@ -3,17 +3,17 @@ import java.util.*;
 
 public class IdentityMap {
 
-	private List personId = new ArrayList();
+	private ArrayList personId = new ArrayList();
 	
 	public boolean verifyIntegrity(int id)
 	{
-		for(Iterator ids = personId.iterator(); ids.hasNext();)
+		
+		if(!personId.contains(id))
 		{
-			if(id == (int)ids.next())
-				return false;
-		}
-		personId.add(id);
-		return true;
+			personId.add(id);
+			return true;
+		}	
+		return false;
 	}
 	
 }
