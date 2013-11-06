@@ -1,5 +1,10 @@
 package com.assignment2.dao;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.assignment2.model.Person;
@@ -29,24 +34,82 @@ public class PersonDao {
 		 return true;
 	 }
 	 
-	 public String[] getPerson(int pid) 
+	 public String[] getPersonbyId(int pid) 
 	 {
+		 Person person = new Person();
+		 
+		 try {
+	            PreparedStatement preparedStatement = connection.
+	                    prepareStatement("select * from person where pid=?");
+	            preparedStatement.setInt(1, pid);
+	            ResultSet rs = preparedStatement.executeQuery();
+
+	            if (rs.next()) {
+	            	person.setpId(rs.getInt("personid"));
+	            	person.setFirstName(rs.getString("firstname"));
+	            	person.setLastName(rs.getString("lastname"));
+	              
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 		return null;
 	 }
 	 
-	 public int[] getAllIds(){
-
-		return null;
+	 public List<Integer> getAllIds(){
+	        List<Integer> idList = new ArrayList<Integer>();
+		try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select personid from person");
+            while (rs.next()) {
+            	
+            	idList.add(rs.getInt("personid"));
+            	
+            }
+		}
+		catch(SQLException e){
+			
+			e.printStackTrace();
+		}
+		return idList;
 	 }
 	  
-	 public String[] getAllFirstNames() 
+	 public List<String> getAllFirstNames() 
 	 {
-		return null;
+		 List<String> firstNameList = new ArrayList<String>();
+			try {
+	            Statement statement = connection.createStatement();
+	            ResultSet rs = statement.executeQuery("select firstname from person");
+	            while (rs.next()) {
+	            	
+	            	firstNameList.add(rs.getString("firstname"));
+	            	
+	            }
+			}
+			catch(SQLException e){
+				
+				e.printStackTrace();
+			}
+			return firstNameList;
 	 }
 	 
-	 public String[] getAllLastNames() 
+	 public List<String> getAllLastNames() 
 	 {
-		return null;
+		 List<String> lastNameList = new ArrayList<String>();
+			try {
+	            Statement statement = connection.createStatement();
+	            ResultSet rs = statement.executeQuery("select lastname from person");
+	            while (rs.next()) {
+	            	
+	            	lastNameList.add(rs.getString("lastname"));
+	            	
+	            }
+			}
+			catch(SQLException e){
+				
+				e.printStackTrace();
+			}
+			return lastNameList;
 	 }
 	 
 }
