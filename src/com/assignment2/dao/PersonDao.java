@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.assignment2.model.Person;
 import com.assignment2.util.DatabaseConnection;
 
 public class PersonDao {
@@ -19,7 +18,7 @@ public class PersonDao {
 	        connection = DatabaseConnection.getConnection();
 	 }
 	 
-	 public boolean addPerson(Person person) 
+	 public boolean addPerson(int id, String firstname, String lastname, String phone, String address) 
 	 {
 		 return true;
 	 }
@@ -29,14 +28,14 @@ public class PersonDao {
 		 return true; 
 	 }
 	 
-	 public boolean updateUser(Person person) 
+	 public boolean updateUser(int id, String firstname, String lastname, String phone, String address) 
 	 {
 		 return true;
 	 }
 	 
 	 public String[] getPersonbyId(int pid) 
 	 {
-		 String[] person = new String[3];
+		 String[] person = new String[5];
 		 
 		 try {
 	            PreparedStatement preparedStatement = connection.
@@ -48,6 +47,8 @@ public class PersonDao {
 	            	person[0] = rs.getInt("personid")+ "";
 	            	person[1] = rs.getString("firstname");
 	            	person[2] = rs.getString("lastname");
+	            	person[3] = rs.getString("phonenumber");
+	            	person[4] = rs.getString("address");
 	            	
 	              
 	            }
@@ -57,8 +58,8 @@ public class PersonDao {
 		return person;
 	 }
 	 
-	 public List<Integer> getAllIds(){
-	        List<Integer> idList = new ArrayList<Integer>();
+	 public ArrayList<Integer> getAllIds(){
+		 ArrayList<Integer> idList = new ArrayList<Integer>();
 		try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select personid from person");
@@ -75,9 +76,9 @@ public class PersonDao {
 		return idList;
 	 }
 	  
-	 public List<String> getAllFirstNames() 
+	 public ArrayList<String> getAllFirstNames() 
 	 {
-		 List<String> firstNameList = new ArrayList<String>();
+		 ArrayList<String> firstNameList = new ArrayList<String>();
 			try {
 	            Statement statement = connection.createStatement();
 	            ResultSet rs = statement.executeQuery("select firstname from person");
@@ -94,9 +95,9 @@ public class PersonDao {
 			return firstNameList;
 	 }
 	 
-	 public List<String> getAllLastNames() 
+	 public ArrayList<String> getAllLastNames() 
 	 {
-		 List<String> lastNameList = new ArrayList<String>();
+		 ArrayList<String> lastNameList = new ArrayList<String>();
 			try {
 	            Statement statement = connection.createStatement();
 	            ResultSet rs = statement.executeQuery("select lastname from person");

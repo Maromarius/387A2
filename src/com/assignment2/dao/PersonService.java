@@ -31,18 +31,20 @@ public class PersonService
     public PeopleContainer getAllFirstLastNamesIds()
     {  
     	PeopleContainer peopleContainer = new PeopleContainer();
-        String[] firstNames = dao.getAllFirstNames();
-        String[] lastNames = dao.getAllLastNames();
-        int[] ids = dao.getAllIds();
+    	ArrayList<String> firstNames = new ArrayList<String>();
+    	ArrayList<String> lastNames = new ArrayList<String>();
+        firstNames = dao.getAllFirstNames();
+        lastNames = dao.getAllLastNames();
+        ArrayList<Integer> ids = dao.getAllIds();
         
-        if(ids.length == firstNames.length && firstNames.length == lastNames.length)
+        if(ids.size() == firstNames.size() && firstNames.size() == lastNames.size())
         {
-        	for(int i = 0; i < ids.length; i++)
+        	for(int i = 0; i < ids.size(); i++)
         	{
         		Person person = new Person();
-                person.setFirstName(firstNames[i]);
-                person.setLastName(lastNames[i]);
-                person.setpId(ids[i]);
+                person.setFirstName(firstNames.get(i));
+                person.setLastName(lastNames.get(i));
+                person.setpId(ids.get(i));
                 peopleContainer.AddPerson(person);
             }
         }
@@ -52,18 +54,19 @@ public class PersonService
     public Person getAllPersonInfo(int pid)
     {
     	Person person = new Person();
-        ArrayList<String> personInfo = (ArrayList<String>) dao.getPersonbyId(pid);
-        person.setpId(Integer.parseInt(personInfo.get(0)));
-        person.setFirstName(personInfo.get(1));
-        person.setLastName(personInfo.get(2));
-        person.setAddress(personInfo.get(3));
-        person.setPhoneNumber(personInfo.get(4));
+    	
+        String[] personInfo = dao.getPersonbyId(pid);
+        person.setpId(Integer.parseInt(personInfo[0]));
+        person.setFirstName(personInfo[1]);
+        person.setLastName(personInfo[2]);
+        person.setAddress(personInfo[3]);
+        person.setPhoneNumber(personInfo[4]);
         return person;
     }
     
-    public boolean updatePerson(int pid)
+    public boolean updatePerson(Person p)
     {
-        return dao.updateUser(peopleContainer.GetPerson(pid));
+        return dao.updateUser(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
     public boolean deletePerson(int pid)
@@ -71,9 +74,9 @@ public class PersonService
     	return dao.deleteUser(pid);
     }
 
-    public boolean createPerson(int pid)
+    public boolean createPerson(Person p)
     {
-    	return dao.addPerson(peopleContainer.GetPerson(pid));
+    	return dao.addPerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
 }
