@@ -8,5 +8,4 @@
 /build
 
 # ENCS login info
-*/src/encs.properties
-*/src/db.properties
+encs.properties
