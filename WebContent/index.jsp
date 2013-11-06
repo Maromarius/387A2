@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>Welcome to this Shit</p>
+<h1><center>Welcome to the Assignment 2</center></h1>
 </body>
 </html>
