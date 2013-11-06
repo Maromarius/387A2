@@ -7,6 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>Welcome to this Shit</p>
+<h1><center>Welcome to the Assignment 2</center></h1>
+//While 
+<%
+//Lazyload the person container
+//Get # of rows from person container
+
+	out.println("<table border=\"1\"");
+	out.println("<tr><td>Person ID</td><td>Name</td><td></td><td></td>");
+	while(/*peoplecontainer hasnext*/)
+	{
+		out.println("<tr><td>"+CurrentPerson.getID+"</td><td>"+currentperson.getFirstName+
+				" "+currentPerson.getLastName+"</td><td>"+UpdateButton+"</td><td>"+DeleteButton+"</td>");
+	}
+	out.println("</table>");
+
+
+
+%>
 </body>
 </html>

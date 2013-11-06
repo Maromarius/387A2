@@ -1,6 +1,6 @@
 package com.assignment2.controller;
 import java.util.*;
-
+import com.assignment2.dao.PersonService;
 public class UnitOfWork {
 	
 	private HashMap<Integer, Integer> info = new HashMap<Integer, Integer>();//Contains Information
@@ -37,7 +37,7 @@ public class UnitOfWork {
 			info.put(pid, 3);
 	}
 	
-	public void commit()
+	public void commit(PersonService PS)
 	{
 		//Iterates through the HashMap
 		Iterator it = info.entrySet().iterator();
@@ -47,15 +47,15 @@ public class UnitOfWork {
 			//Produces the Operations for the DB with the ID's
 			if((int)pair.getValue()==1)
 			{
-				//CREATE NEW ENTRY ON DB pair.getKey()
+				PS.createNewPerson(pair.getKey());
 			}
 			if((int)pair.getValue()==2)
 			{
-				//UPDATE ON DB pair.getKey()
+				PS.updatePerson(pair.getKey());
 			}
 			if((int)pair.getValue()==3)
 			{
-				//DELETE ON DB pair.getKey()
+				PS.removePerson(pair.getKey());
 			}
 		}
 	}
