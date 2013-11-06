@@ -9,23 +9,45 @@ public class PersonDao {
 	
 	private Connection connection;
 	
-	 public PersonDao() {
+	 public PersonDao() 
+	 {
 	        connection = DatabaseConnection.getConnection();
-	    }
+	 }
 	 
-	 public void addPerson(Person person) {}
+	 public boolean addPerson(Person person) 
+	 {
+		 return true;
+	 }
 	 
-	 public void deleteUser(int PersonId) {}
+	 public boolean deleteUser(int PersonId) 
+	 {
+		 return true; 
+	 }
 	 
-	 public void updateUser(Person person) {}
+	 public boolean updateUser(Person person) 
+	 {
+		 return true;
+	 }
 	 
-	 public List<Person> getAllPerson() {
-		return null;}
+	 public String[] getPerson(int pid) 
+	 {
+		return null;
+	 }
 	 
-	 public Person getPersonById(int userId) {
-		return null;}
+	 public String[] getAllIds() 
+	 {
+		return null;
+	 }
+	 
+	 public String[] getAllFirstNames() 
+	 {
+		return null;
+	 }
+	 
+	 public String[] getAllLastNames() 
+	 {
+		return null;
+	 }
 	 
 	 
-	 
-
 }
