@@ -49,21 +49,4 @@ public class PersonDao {
 		return null;
 	 }
 	 
-	 
-<<<<<<< HEAD
-	 public void deletePerson(int PersonId) {}
-	 
-	 public void updatePerson(Person person) {}
-	 
-	 public List<Person> getAllPerson() {
-		return null;}
-	 
-	 public Person getPersonById(int userId) {
-		return null;}
-	 
-	 
-	 
-
-=======
->>>>>>> b2735b8bb4790b4c84640f0d41753602fb24a3b6
 }
