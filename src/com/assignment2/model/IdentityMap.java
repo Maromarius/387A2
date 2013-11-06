@@ -1,3 +1,4 @@
+package com.assignment2.model;
 import java.util.*;
 
 public class IdentityMap {
