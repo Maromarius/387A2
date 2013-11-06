@@ -35,9 +35,14 @@ public class PeopleContainer {
         return peopleList.get(pid);
     }
     
-    public void RemovePerson(int pid)
+    public boolean RemovePerson(int pid)
     {
-    	peopleList.remove(pid);
+    	if(peopleList.containsKey(pid))
+    	{
+    		peopleList.remove(pid);
+        	return true;
+    	}
+    	return false;
     }
     
     public void UpdatePerson(int pid, Person newPerson)
@@ -47,7 +52,7 @@ public class PeopleContainer {
         peopleList.put(pid, newPerson);
     }
     
-    public Map<Integer,Person> GetPeopleList()
+    public Map<Integer,Person> GetContainer()
     {
         return peopleList;
     }
