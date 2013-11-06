@@ -35,7 +35,11 @@ public class PersonDao {
 	 }
 	 
 	 public int[] getAllIds() 
+<<<<<<< HEAD
 	 { 
+=======
+	 {
+>>>>>>> 9a1c36f... Changed it again
 		return null;
 	 }
 	  
