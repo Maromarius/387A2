@@ -35,10 +35,10 @@ public class PersonDao {
 	 }
 	 
 	 public int[] getAllIds() 
-	 {
+	 { 
 		return null;
 	 }
-	 
+	  
 	 public String[] getAllFirstNames() 
 	 {
 		return null;
