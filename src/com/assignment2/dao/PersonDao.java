@@ -34,7 +34,7 @@ public class PersonDao {
 		return null;
 	 }
 	 
-	 public String[] getAllIds() 
+	 public int[] getAllIds() 
 	 {
 		return null;
 	 }
