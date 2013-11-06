@@ -34,12 +34,8 @@ public class PersonDao {
 		return null;
 	 }
 	 
-	 public int[] getAllIds() 
-<<<<<<< HEAD
-	 { 
-=======
-	 {
->>>>>>> 9a1c36f... Changed it again
+	 public int[] getAllIds(){
+
 		return null;
 	 }
 	  
