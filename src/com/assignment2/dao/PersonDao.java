@@ -36,7 +36,7 @@ public class PersonDao {
 	 
 	 public String[] getPersonbyId(int pid) 
 	 {
-		 Person person = new Person();
+		 String[] person = new String[3];
 		 
 		 try {
 	            PreparedStatement preparedStatement = connection.
@@ -45,15 +45,16 @@ public class PersonDao {
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
-	            	person.setpId(rs.getInt("personid"));
-	            	person.setFirstName(rs.getString("firstname"));
-	            	person.setLastName(rs.getString("lastname"));
+	            	person[0] = rs.getInt("personid")+ "";
+	            	person[1] = rs.getString("firstname");
+	            	person[2] = rs.getString("lastname");
+	            	
 	              
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-		return null;
+		return person;
 	 }
 	 
 	 public List<Integer> getAllIds(){
