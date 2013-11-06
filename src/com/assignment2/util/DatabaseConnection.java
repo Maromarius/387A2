@@ -27,12 +27,12 @@ public class DatabaseConnection
 	public static Connection getConnection() 
 	{
 		Connection connection = null;
-		
-		String strSshUser = ""; // SSH ENCS login Username
-		String strSshPassword = ""; // SSH ENCS login password
-		String strSshHost = "login.encs.concordia.ca"; // hostname or ip of SSH server
+		// SSH CONNECTION SETTINGS TO LOG IN TO CONCORDIA
+		String sshUser = ""; // ENCS LOGIN USERNAME
+		String sshPassword = ""; // ENCS LOGIN PASSWORD
+		String sshHost = "login.encs.concordia.ca"; 
 		int nSshPort = 22; // remote SSH host port number
-		String strRemoteHost = "clipper.encs.concordia.ca"; // hostname or ip of your database server
+		String strRemoteHost = "clipper.encs.concordia.ca"; // Host-name of database server
 		int nLocalPort = 3334; //int nLocalPort = findUnusedPort(); // local port number use to bind SSH
 		// tunnel
 		int nRemotePort = 3306; // remote port number of your database
@@ -41,12 +41,12 @@ public class DatabaseConnection
 		Session session=null;
 		try 
 		{
-			session = jsch.getSession(strSshUser, strSshHost, nSshPort);
+			session = jsch.getSession(sshUser, sshHost, nSshPort);
 		} catch (JSchException e1) 
 		{
 			e1.printStackTrace();
 		}
-		session.setPassword(strSshPassword);
+		session.setPassword(sshPassword);
 		final Properties config = new Properties();
 		config.put("StrictHostKeyChecking", "no");
 		session.setConfig(config);
@@ -68,46 +68,59 @@ public class DatabaseConnection
 		String databaseName = "soen387k";
 		String username = "soen387k";
 		String password = "e73v72";
-		
-		String url = "jdbc:mysql://"+"127.0.0.1"+":"+nLocalPort+"/"+databaseName;
+		String localHostIP = "127.0.0.1";
+		String url = "jdbc:mysql://"+localHostIP+":"+nLocalPort+"/"+databaseName;
 
-		try {
+		try 
+		{
 			connection = DriverManager.getConnection(url, username, password);
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 		return connection;
 
 	}
 
-	public static void close(ResultSet rs, Statement stmt, Connection con) {
-		try {
+	public static void close(ResultSet rs, Statement stmt, Connection con) 
+	{
+		try 
+		{
 			if (rs != null)
 				rs.close();
-		} catch (Exception ex) {
+		} catch (Exception ex) 
+		{
 			ex.printStackTrace();
 		}
-		try {
+		try 
+		{
 			if (stmt != null)
 				stmt.close();
-		} catch (Exception ex) {
+		} catch (Exception ex) 
+		{
 			ex.printStackTrace();
 		}
-		try {
+		try 
+		{
 			if (con != null)
 				con.close();
-		} catch (Exception ex) {
+		} catch (Exception ex) 
+		{
 			ex.printStackTrace();
 		}
 	}
-
-	public static void printRs(ResultSet rs) {
-		try {
+	
+	public static void printRs(ResultSet rs) 
+	{
+		try 
+		{
 			ResultSetMetaData meta = rs.getMetaData();
 			int cols = meta.getColumnCount();
 			StringBuffer sb = new StringBuffer();
-			while (rs.next()) {
-				for (int i = 1; i <= cols; i++) {
+			while (rs.next()) 
+			{
+				for (int i = 1; i <= cols; i++) 
+				{
 					String columnName = meta.getColumnName(i);
 					sb.append(columnName + "=");
 					sb.append(rs.getString(columnName) + "  ");
@@ -117,21 +130,6 @@ public class DatabaseConnection
 			System.out.print(sb.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) 
-	{
-		Connection connection = getConnection();
-
-		if (connection != null) 
-		{
-			System.out.println("Connection : true");
-			close(null, null, connection);
-		} 
-		else 
-		{
-			System.out.println("Connection : false");
 		}
 	}
 }
