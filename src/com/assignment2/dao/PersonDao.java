@@ -15,9 +15,9 @@ public class PersonDao {
 	 
 	 public void addPerson(Person person) {}
 	 
-	 public void deleteUser(int PersonId) {}
+	 public void deletePerson(int PersonId) {}
 	 
-	 public void updateUser(Person person) {}
+	 public void updatePerson(Person person) {}
 	 
 	 public List<Person> getAllPerson() {
 		return null;}
