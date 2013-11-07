@@ -69,9 +69,9 @@ public class PersonService
         return dao.updateUser(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
-    public boolean deletePerson(int pid)
+    public boolean deletePerson(Person p)
     {
-    	return dao.deleteUser(pid);
+    	return dao.deleteUser(p.getpId());
     }
 
     public boolean createPerson(Person p)

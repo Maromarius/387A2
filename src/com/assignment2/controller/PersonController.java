@@ -1,12 +1,16 @@
 package com.assignment2.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.assignment2.model.PeopleContainer;
+import com.assignment2.model.Person;
 
 /**
  * Servlet implementation class PersonController
@@ -31,6 +35,20 @@ public class PersonController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try{
+			Person p = new Person();
+			p.setpId(100);
+			p.setFirstName("Yo");
+			p.setLastName("Nigga");
+			personList.AddPerson(p);
+			//Load Persons into personList;
+			HttpSession session = request.getSession(true);
+			session.setAttribute("currentpersonList",personList);
+			
+		}catch(Throwable theException){
+			System.out.println(theException);
+		}
+		
 	}
 
 	/**
