@@ -48,7 +48,7 @@ public class UnitOfWork {
 			//Produces the Operations for the DB with the ID's
 			if((int)pair.getValue()==1)
 			{
-				PS.createNewPerson(PC.GetPerson((int)pair.getKey()));
+				PS.createPerson(PC.GetPerson((int)pair.getKey()));
 			}
 			if((int)pair.getValue()==2)
 			{
@@ -56,7 +56,7 @@ public class UnitOfWork {
 			}
 			if((int)pair.getValue()==3)
 			{
-				PS.removePerson(PC.GetPerson((int)pair.getKey()));
+				PS.deletePerson(PC.GetPerson((int)pair.getKey()));
 			}
 		}
 	}

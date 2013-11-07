@@ -18,16 +18,19 @@ public class PeopleContainer {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
-    private Map<Integer,Person> peopleList;
+    private HashMap<Integer,Person> peopleList;
+    private int size;
     
     public PeopleContainer()
     {
-        peopleList = new HashMap<Integer,Person>() {};
+        peopleList = new HashMap<Integer,Person>();
+        size=0;
     }
     
     public void AddPerson(Person p)
     {
         peopleList.put(p.getpId(), p);
+        size++;
     }
     
     public Person GetPerson(int pid)
@@ -40,7 +43,8 @@ public class PeopleContainer {
     	if(peopleList.containsKey(pid))
     	{
     		peopleList.remove(pid);
-        	return true;
+        	size--;
+    		return true;
     	}
     	return false;
     }
@@ -51,8 +55,10 @@ public class PeopleContainer {
         
         peopleList.put(pid, newPerson);
     }
-    
-    public Map<Integer,Person> GetContainer()
+    public int getSize(){
+    	return size;
+    }
+    public HashMap<Integer,Person> GetContainer()
     {
         return peopleList;
     }
