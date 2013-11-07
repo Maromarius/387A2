@@ -7,7 +7,7 @@
 <title>Main Page</title>
 </head>
 <body>
-<h1><center>Welcome to the Assignment 2</center></h1>
+<h1><center>Welcome to the Assignment 2</center></h1> 
 <%
 //Lazyload the person container
 //Get # of rows from person container
