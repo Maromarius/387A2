@@ -1,35 +1,24 @@
 package com.assignment2.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.assignment2.dao.PersonService;
-import com.assignment2.model.PeopleContainer;
-import com.assignment2.model.Person;
 
 /**
- * Servlet implementation class PersonController
+ * Servlet implementation class DoSave
  */
-@WebServlet("/PersonController")
-
-public class PersonController extends HttpServlet {
+@WebServlet("/DoSave")
+public class DoSave extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private UnitOfWork UOW;
-    private PeopleContainer personList;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonController() 
-    {
+    public DoSave() {
         super();
-        personList = new PeopleContainer();
-        UOW = new UnitOfWork();
         // TODO Auto-generated constructor stub
     }
 
@@ -38,23 +27,13 @@ public class PersonController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try{
-			personList = PersonService.getInstance().getAllFirstLastNamesIds();
-			HttpSession session = request.getSession(true);
-			session.setAttribute("currentpersonList",personList);
-			response.sendRedirect("ShowPeopleInfo.jsp");
-			
-		}catch(Throwable theException){
-			System.out.println(theException);
-		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		// TODO Auto-generated method stub
 	}
 
 }

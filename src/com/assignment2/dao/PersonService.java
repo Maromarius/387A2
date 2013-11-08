@@ -21,16 +21,27 @@ import java.util.Map;
  */
 public class PersonService 
 {
+	private static PersonService instance;
+	private PeopleContainer peopleContainer;
+	
 	private PersonDao dao;
     
-    public PersonService()
+    private PersonService()
     {
     	dao = new PersonDao();
     }
    
+    public static PersonService getInstance() {
+    	if(instance == null)
+    	{
+    		instance = new PersonService();
+    	}
+        return instance;
+    }
+    
     public PeopleContainer getAllFirstLastNamesIds()
     {  
-    	PeopleContainer peopleContainer = new PeopleContainer();
+    	peopleContainer = new PeopleContainer();
     	ArrayList<String> firstNames = new ArrayList<String>();
     	ArrayList<String> lastNames = new ArrayList<String>();
         firstNames = dao.getAllFirstNames();
@@ -53,29 +64,32 @@ public class PersonService
     
     public Person getAllPersonInfo(int pid)
     {
-    	Person person = new Person();
+    	Person person = peopleContainer.GetContainer().get(pid);
     	
         String[] personInfo = dao.getPersonbyId(pid);
-        person.setpId(Integer.parseInt(personInfo[0]));
-        person.setFirstName(personInfo[1]);
-        person.setLastName(personInfo[2]);
         person.setAddress(personInfo[3]);
         person.setPhoneNumber(personInfo[4]);
+        
+        peopleContainer.GetContainer().put(pid, person);
+        
         return person;
     }
     
     public boolean updatePerson(Person p)
     {
-        return dao.updateUser(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	peopleContainer.GetContainer().put(p.getpId(), p);
+        return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
     public boolean deletePerson(Person p)
     {
-    	return dao.deleteUser(p.getpId());
+    	peopleContainer.GetContainer().remove(p.getpId());
+    	return dao.deletePerson(p.getpId());
     }
 
     public boolean createPerson(Person p)
     {
+    	peopleContainer.GetContainer().put(p.getpId(), p);
     	return dao.addPerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     

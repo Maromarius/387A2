@@ -22,7 +22,6 @@
 			<th>Modify</th>
 		</tr>
 	    <%
-	    PersonController controller = new PersonController();
 	    PeopleContainer container = (PeopleContainer) session.getAttribute("currentpersonList");
 	    ArrayList<Person> personList = container.GetPersonList();
 	    
@@ -30,9 +29,14 @@
 	    {
 	    %>
 	        <tr>
-				<td ><%personList.get(i).getFirstName(); %> </td>
-				<td><%personList.get(i).getLastName(); %></td>
-				<td>Edit</td>
+				<td ><%=personList.get(i).getFirstName() %> </td>
+				<td><%=personList.get(i).getLastName() %></td>
+				<td>
+					<form action="EditPersonInfo">
+						<input Value="Edit" type="submit"/>
+						<input Value="<%=personList.get(i).getpId()%>" type="hidden" Name="personID" >
+					</form>
+				</td>
 			</tr>
 		<%}%>
 
