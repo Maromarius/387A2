@@ -40,13 +40,13 @@ public class PersonDao {
 		return executeSQLStatement(sql);
 	 }
 	 
-	 public boolean deleteUser(int PersonId) 
+	 public boolean deletePerson(int PersonId) 
 	 {
 		 String sql = "DELETE FROM `soen387k`.`Person` WHERE `PID`='"+PersonId+"';";
 		 return executeSQLStatement(sql);
 	 }
 	 
-	 public boolean updateUser(int id, String firstname, String lastname, String phone, String address) 
+	 public boolean updatePerson(int id, String firstname, String lastname, String phone, String address) 
 	 {
 		 String sql = "UPDATE `soen387k`.`Person` SET `firstname`='"+firstname+"', `lastname`='"+lastname+"', "
 		 		+ "`address`='"+address+"',  `phone`='"+phone+"' WHERE `PID`='"+id+"';";
