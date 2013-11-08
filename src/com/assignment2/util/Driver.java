@@ -22,7 +22,7 @@ public class Driver
 			{
 				e.printStackTrace();
 			}
-			String sql = "";
+			String sql = "Select * From Person";
 			System.out.println(statement.execute(sql));
 			
 			DatabaseConnection.close(null, null, connection);
