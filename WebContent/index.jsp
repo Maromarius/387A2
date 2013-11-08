@@ -18,28 +18,5 @@
 	                <input type="submit" value="Submit">
 	            </form>
 	</center>
-
-<%
-/*
-Lazyload the person container
-Get # of rows from person container
-
-	out.println("<table border=\"1\"");
-	out.println("<tr><td>Person ID</td><td>First Name</td><td>Last Name</td><td></td><td></td></tr>");
-	Person currentPerson = new Person();
-	PeopleContainer currentList = (PeopleContainer) session.getAttribute("currentpersonList");
-	Iterator it = currentList.GetContainer().entrySet().iterator();
-	while(it.hasNext())
-	{
-		Map.Entry pair = (Map.Entry)it.next();
-		currentPerson = (Person)pair.getValue();
-		out.println("<tr><td>"+currentPerson.getpId()+"</td><td>"+currentPerson.getFirstName()+
-				" "+currentPerson.getLastName()+"</td><td>"+"UpdateButton"+"</td><td>"+"DeleteButton"+"</td></tr>");
-	}
-	out.println("</table>");
-
-*/
-
-%>
 </body>
 </html>

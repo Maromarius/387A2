@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.assignment2.model.Person"%>
+<%@page import="com.assignment2.dao.PersonService"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,23 +17,20 @@
 			<th>Address</th>
 			<th>Phone Number</th>
 		</tr>
-	    <%
-	  	Person personToEdit = (Person) session.getAttribute("personToEdit");
-	    %>
 	    <form action="DoSave" method="get">
 	        <tr>
 				<td>
-					<input type="hidden" name="personID" value=<%=personToEdit.getpId()%>></input>
-					<input type="text" name="firstName" value=<%=personToEdit.getFirstName()%>></input>
+					<input type="hidden" name="personID" value=<%=PersonService.getInstance().getNextPId() %>>></input>
+					<input type="text" name="firstName" ></input>
 				</td>
 				<td>
-					<input type="text" name="lastName" value=<%=personToEdit.getLastName()%> ></input>
+					<input type="text" name="lastName"  ></input>
 				</td>
 				<td>
-					<input type="text" name="address" value=<%=personToEdit.getAddress()%>></input>
+					<input type="text" name="address"></input>
 				</td>
 				<td>
-					<input type="text" name="phone" value=<%=personToEdit.getPhoneNumber()%>></input>
+					<input type="text" name="phone"></input>
 				</td>
 			</tr>
 

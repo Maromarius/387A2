@@ -7,22 +7,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.assignment2.dao.PersonService;
-import com.assignment2.model.Person;
 
 /**
- * Servlet implementation class EditPersonInfo
+ * Servlet implementation class DeletePerson
  */
-@WebServlet("/EditPersonInfo")
-public class EditPersonInfo extends HttpServlet {
+@WebServlet("/DeletePerson")
+public class DeletePerson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditPersonInfo() {
+    public DeletePerson() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +29,9 @@ public class EditPersonInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
 		int pId = (int) Integer.parseInt(request.getParameter("personID").toString());
-		Person p = PersonService.getInstance().getContainer().GetPerson(pId);
-		
-		if(!p.isLazyLoaded())
-		{
-			//Lazy load the person
-			p =  PersonService.getInstance().getAllPersonInfo(pId);
-		}
-			
-		session.setAttribute("personToEdit",p);
-		response.sendRedirect("EditPersonPage.jsp");
+		PersonService.getInstance().getContainer().RemovePerson(pId);
+		response.sendRedirect("PersonController");
 	}
 
 	/**

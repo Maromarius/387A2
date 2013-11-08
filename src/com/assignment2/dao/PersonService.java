@@ -5,7 +5,9 @@
 package com.assignment2.dao;
 
 import java.sql.Connection;
+
 import com.assignment2.util.DatabaseConnection;
+import com.assignment2.controller.UnitOfWork;
 import com.assignment2.model.PeopleContainer;
 import com.assignment2.model.Person;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
@@ -23,12 +25,15 @@ public class PersonService
 {
 	private static PersonService instance;
 	private PeopleContainer peopleContainer;
+	private int NextPId;
 	
 	private PersonDao dao;
     
     private PersonService()
     {
     	dao = new PersonDao();
+    	peopleContainer = new PeopleContainer();
+    	NextPId = 1;
     }
    
     public static PersonService getInstance() {
@@ -37,6 +42,21 @@ public class PersonService
     		instance = new PersonService();
     	}
         return instance;
+    }
+    
+    public PeopleContainer getContainer()
+    {
+    	return peopleContainer;
+    }
+    
+    public boolean PersonExists(Person p)
+    {
+    	return peopleContainer.GetPersonMap().containsKey(p.getpId());
+    }
+    
+    public int getNextPId()
+    {
+    	return NextPId++;
     }
     
     public PeopleContainer getAllFirstLastNamesIds()
@@ -64,33 +84,56 @@ public class PersonService
     
     public Person getAllPersonInfo(int pid)
     {
-    	Person person = peopleContainer.GetContainer().get(pid);
+    	Person person = peopleContainer.GetPersonMap().get(pid);
     	
         String[] personInfo = dao.getPersonbyId(pid);
         person.setAddress(personInfo[3]);
         person.setPhoneNumber(personInfo[4]);
+        person.setLazyLoaded();
         
-        peopleContainer.GetContainer().put(pid, person);
+        peopleContainer.GetPersonMap().put(pid, person);
         
         return person;
     }
     
     public boolean updatePerson(Person p)
     {
-    	peopleContainer.GetContainer().put(p.getpId(), p);
-        return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	UnitOfWork.GetInstance().registerDirty(p.getpId());
+    	peopleContainer.UpdatePerson(p);
+        //return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	return true;
     }
     
-    public boolean deletePerson(Person p)
+    public boolean updatePersonDAO(int pid)
     {
-    	peopleContainer.GetContainer().remove(p.getpId());
-    	return dao.deletePerson(p.getpId());
+    	Person p = this.getContainer().GetPerson(pid);
+    	return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    }
+    
+    public boolean deletePersonDAO(int pid)
+    {
+    	return dao.deletePerson(pid);
+    }
+    
+    public boolean deletePerson(int pid)
+    {
+    	UnitOfWork.GetInstance().registerRemoved(pid);
+    	peopleContainer.RemovePerson(pid);
+    	return true;
     }
 
+    public boolean createPersonDAO(int pid)
+    {
+    	Person p = this.getContainer().GetPerson(pid);
+    	return dao.addPerson(p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    }
+    
     public boolean createPerson(Person p)
     {
-    	peopleContainer.GetContainer().put(p.getpId(), p);
-    	return dao.addPerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	UnitOfWork.GetInstance().registerNew(p.getpId());
+    	peopleContainer.AddPerson(p);
+    	
+    	return true;
     }
     
 }

@@ -33,10 +33,10 @@ public class PersonDao {
 		}
 	 }
 	 
-	 public boolean addPerson(int id, String firstname, String lastname, String phone, String address) 
+	 public boolean addPerson(String firstname, String lastname, String phone, String address) 
 	 {
-		String sql = "INSERT INTO `soen387k`.`Person` (`PID`, `firstname`, `lastname`, `address`, `phone`) "
-				+ "VALUES ('"+id+"', '"+firstname+"', '"+lastname+"', '"+address+"', '"+phone+"');";
+		String sql = "INSERT INTO `soen387k`.`Person` (`firstname`, `lastname`, `address`, `phone`) "
+				+ "VALUES ('"+firstname+"', '"+lastname+"', '"+address+"', '"+phone+"');";
 		return executeSQLStatement(sql);
 	 }
 	 

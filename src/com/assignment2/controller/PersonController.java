@@ -21,15 +21,12 @@ import com.assignment2.model.Person;
 public class PersonController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UnitOfWork UOW;
-    private PeopleContainer personList;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public PersonController() 
     {
         super();
-        personList = new PeopleContainer();
-        UOW = new UnitOfWork();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,9 +36,15 @@ public class PersonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
-			personList = PersonService.getInstance().getAllFirstLastNamesIds();
+
 			HttpSession session = request.getSession(true);
-			session.setAttribute("currentpersonList",personList);
+			
+			if(PersonService.getInstance().getContainer().GetSize() == 0)
+			{
+				//Get initial information from database, get's called once.
+				session.setAttribute("currentpersonList",PersonService.getInstance().getAllFirstLastNamesIds());
+			}
+			
 			response.sendRedirect("ShowPeopleInfo.jsp");
 			
 		}catch(Throwable theException){

@@ -7,22 +7,26 @@ public class Person {
 	    private String lastName;
 	    private String address;
 	    private String phoneNumber;
+	    private boolean lazyLoaded;
 
 	    public Person()
 	    {
+	    	lazyLoaded = false;
 	        firstName = "";
 	        lastName = "";
 	        address = "";
 	        phoneNumber = "";
 	        pId = -1;
 	    }
-	    public Person(int pid, String firstname, String lastname, String addr, String phonenumber)
+	    public Person(int pid, String firstname, String lastname, String addr, String phonenumber, boolean lazyloaded)
 	    {
+	    	lazyLoaded = false;
 	        firstName =firstname;
 	        lastName = lastname;
 	        phoneNumber = phonenumber;
 	        address = addr;
 	        pId = pid;
+	        lazyLoaded = lazyloaded;
 	    }
 	       
 	    
@@ -95,5 +99,19 @@ public class Person {
 	    public void setPhoneNumber(String phoneNumber) {
 	        this.phoneNumber = phoneNumber;
 	    }
+	    public void setLazyLoaded()
+	    {
+	    	lazyLoaded = true;
+	    }
+	    public boolean isLazyLoaded()
+	    {
+	    	return lazyLoaded;
+	    }
+	    
+	    public boolean IsEqual(Person p)
+	    {
+	    	return (this.address.equals(p.getAddress()) && this.phoneNumber.equals(p.getPhoneNumber()) && this.firstName.equals(p.getFirstName()) && this.lastName.equals(p.getLastName()) && this.pId == p.getpId());
+	    }
+	
 
 }

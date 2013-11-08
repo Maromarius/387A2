@@ -22,20 +22,17 @@ public class PeopleContainer {
     
 	private ArrayList<Integer> pIds;
     private HashMap<Integer,Person> peopleList;
-    private int size;
     
     public PeopleContainer()
     {
     	pIds = new ArrayList<Integer>();
         peopleList = new HashMap<Integer,Person>();
-        size=0;
     }
     
     public void AddPerson(Person p)
     {
     	pIds.add(p.getpId());
         peopleList.put(p.getpId(), p);
-        size++;
     }
     
     public Person GetPerson(int pid)
@@ -47,22 +44,24 @@ public class PeopleContainer {
     {
     	if(peopleList.containsKey(pid))
     	{
-    		pIds.remove(pid);
+    		for(int i = 0; i < pIds.size(); i++)
+    		{
+    			if(pIds.get(i) == pid)
+    			{
+    				pIds.remove(i);
+    			}
+    		}
     		peopleList.remove(pid);
-        	size--;
     		return true;
     	}
     	return false;
     }
     
-    public void UpdatePerson(int pid, Person newPerson)
+    public void UpdatePerson(Person p)
     {
-        peopleList.remove(pid);
-        peopleList.put(pid, newPerson);
+        peopleList.put(p.getpId(), p);
     }
-    public int getSize(){
-    	return size;
-    }
+    
     public ArrayList<Person> GetPersonList()
     {
     	ArrayList<Person> people = new ArrayList<Person>();
@@ -72,7 +71,13 @@ public class PeopleContainer {
     	}
     	return people;
     }
-    public HashMap<Integer,Person> GetContainer()
+    
+    public int GetSize()
+    {
+    	return this.peopleList.size();
+    }
+    
+    public HashMap<Integer,Person> GetPersonMap()
     {
         return peopleList;
     }

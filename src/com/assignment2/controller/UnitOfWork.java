@@ -4,10 +4,26 @@ import com.assignment2.dao.PersonService;
 import com.assignment2.model.PeopleContainer;
 public class UnitOfWork {
 	
-	private HashMap<Integer, Integer> info = new HashMap<Integer, Integer>();//Contains Information
+	private HashMap<Integer, Integer> info;//Contains Information
+	private static UnitOfWork UOW;
 	
-	public UnitOfWork(){
+	private UnitOfWork()
+	{
+		info = new HashMap<Integer, Integer>();
 	}
+	
+	public static UnitOfWork GetInstance()
+	{
+		if(UOW == null)
+			UOW = new UnitOfWork();
+		return UOW;
+	}
+	
+	public boolean ContainsKey(int pid)
+	{
+		return info.containsKey(pid);
+	}
+	
 	public void registerNew(int pid)
 	{
 		if(info.containsKey(pid))
@@ -26,7 +42,7 @@ public class UnitOfWork {
 		else
 			info.put(pid, 2);			
 	}
-	
+
 	public void registerRemoved(int pid)
 	{
 		if(info.containsKey(pid))
@@ -38,26 +54,30 @@ public class UnitOfWork {
 			info.put(pid, 3);
 	}
 	
-	public void commit(PersonService PS, PeopleContainer PC)
+	public void commit()
 	{
-		//Iterates through the HashMap
-		Iterator it = info.entrySet().iterator();
-		while(it.hasNext())
+		if(info.size() > 0)
 		{
-			Map.Entry pair = (Map.Entry)it.next();
-			//Produces the Operations for the DB with the ID's
-			if((int)pair.getValue()==1)
+			//Iterates through the HashMap
+			Iterator it = info.entrySet().iterator();
+			while(it.hasNext())
 			{
-				PS.createPerson(PC.GetPerson((int)pair.getKey()));
+				Map.Entry pair = (Map.Entry)it.next();
+				//Produces the Operations for the DB with the ID's
+				if((int)pair.getValue()==1)
+				{
+					PersonService.getInstance().createPersonDAO((int)pair.getKey());
+				}
+				if((int)pair.getValue()==2)
+				{
+					PersonService.getInstance().updatePersonDAO((int)pair.getKey());
+				}
+				if((int)pair.getValue()==3)
+				{
+					PersonService.getInstance().deletePersonDAO((int)pair.getKey());
+				}
 			}
-			if((int)pair.getValue()==2)
-			{
-				PS.updatePerson(PC.GetPerson((int)pair.getKey()));
-			}
-			if((int)pair.getValue()==3)
-			{
-				PS.deletePerson(PC.GetPerson((int)pair.getKey()));
-			}
+			info.clear();
 		}
 	}
 }

@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.assignment2.dao.PersonService;
-import com.assignment2.model.Person;
-
 /**
- * Servlet implementation class EditPersonInfo
+ * Servlet implementation class DoCommit
  */
-@WebServlet("/EditPersonInfo")
-public class EditPersonInfo extends HttpServlet {
+@WebServlet("/DoCommit")
+public class DoCommit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditPersonInfo() {
+    public DoCommit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +27,12 @@ public class EditPersonInfo extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		UnitOfWork.GetInstance().commit();
 		HttpSession session = request.getSession(true);
-		int pId = (int) Integer.parseInt(request.getParameter("personID").toString());
-		Person p = PersonService.getInstance().getContainer().GetPerson(pId);
-		
-		if(!p.isLazyLoaded())
-		{
-			//Lazy load the person
-			p =  PersonService.getInstance().getAllPersonInfo(pId);
-		}
-			
-		session.setAttribute("personToEdit",p);
-		response.sendRedirect("EditPersonPage.jsp");
+		session.setAttribute("message", "Commit Completed");
+		response.sendRedirect("ShowPeopleInfo.jsp");
 	}
 
 	/**
