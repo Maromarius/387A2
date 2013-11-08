@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.assignment2.util.DatabaseConnection;
 
@@ -15,22 +14,43 @@ public class PersonDao {
 	
 	 public PersonDao() 
 	 {
-	        connection = DatabaseConnection.getConnection();
+		 connection = DatabaseConnection.getConnection();
+	 }
+	 
+	 public boolean executeSQLStatement(String sql)
+	 {
+		Statement statement = null;
+		try 
+		{
+			statement = connection.createStatement();
+			statement.execute(sql);
+			return true; // successful operation
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			return false; // unsuccessful operation
+		}
 	 }
 	 
 	 public boolean addPerson(int id, String firstname, String lastname, String phone, String address) 
 	 {
-		 return true;
+		String sql = "INSERT INTO `soen387k`.`Person` (`PID`, `firstname`, `lastname`, `address`, `phone`) "
+				+ "VALUES ('"+id+"', '"+firstname+"', '"+lastname+"', '"+address+"', '"+phone+"');";
+		return executeSQLStatement(sql);
 	 }
 	 
 	 public boolean deleteUser(int PersonId) 
 	 {
-		 return true; 
+		 String sql = "DELETE FROM `soen387k`.`Person` WHERE `PID`='"+PersonId+"';";
+		 return executeSQLStatement(sql);
 	 }
 	 
 	 public boolean updateUser(int id, String firstname, String lastname, String phone, String address) 
 	 {
-		 return true;
+		 String sql = "UPDATE `soen387k`.`Person` SET `firstname`='"+firstname+"', `lastname`='"+lastname+"', "
+		 		+ "`address`='"+address+"',  `phone`='"+phone+"' WHERE `PID`='"+id+"';";
+		 return executeSQLStatement(sql);
 	 }
 	 
 	 public String[] getPersonbyId(int pid) 
@@ -39,15 +59,15 @@ public class PersonDao {
 		 
 		 try {
 	            PreparedStatement preparedStatement = connection.
-	                    prepareStatement("select * from person where pid=?");
+	                    prepareStatement("select * from Person where PID=?");
 	            preparedStatement.setInt(1, pid);
 	            ResultSet rs = preparedStatement.executeQuery();
 
 	            if (rs.next()) {
-	            	person[0] = rs.getInt("personid")+ "";
+	            	person[0] = rs.getInt("PID")+ "";
 	            	person[1] = rs.getString("firstname");
 	            	person[2] = rs.getString("lastname");
-	            	person[3] = rs.getString("phonenumber");
+	            	person[3] = rs.getString("phone");
 	            	person[4] = rs.getString("address");
 	            	
 	              
@@ -62,10 +82,10 @@ public class PersonDao {
 		 ArrayList<Integer> idList = new ArrayList<Integer>();
 		try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select personid from person");
+            ResultSet rs = statement.executeQuery("select PID from Person");
             while (rs.next()) {
             	
-            	idList.add(rs.getInt("personid"));
+            	idList.add(rs.getInt("PID"));
             	
             }
 		}
@@ -81,7 +101,7 @@ public class PersonDao {
 		 ArrayList<String> firstNameList = new ArrayList<String>();
 			try {
 	            Statement statement = connection.createStatement();
-	            ResultSet rs = statement.executeQuery("select firstname from person");
+	            ResultSet rs = statement.executeQuery("select firstname from Person");
 	            while (rs.next()) {
 	            	
 	            	firstNameList.add(rs.getString("firstname"));
@@ -100,7 +120,7 @@ public class PersonDao {
 		 ArrayList<String> lastNameList = new ArrayList<String>();
 			try {
 	            Statement statement = connection.createStatement();
-	            ResultSet rs = statement.executeQuery("select lastname from person");
+	            ResultSet rs = statement.executeQuery("select lastname from Person");
 	            while (rs.next()) {
 	            	
 	            	lastNameList.add(rs.getString("lastname"));
