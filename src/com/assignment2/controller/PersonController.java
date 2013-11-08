@@ -16,6 +16,7 @@ import com.assignment2.model.Person;
  * Servlet implementation class PersonController
  */
 @WebServlet("/PersonController")
+
 public class PersonController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UnitOfWork UOW;
@@ -44,6 +45,7 @@ public class PersonController extends HttpServlet {
 			//Load Persons into personList;
 			HttpSession session = request.getSession(true);
 			session.setAttribute("currentpersonList",personList);
+			response.sendRedirect("ShowPeopleInfo.jsp");
 			
 		}catch(Throwable theException){
 			System.out.println(theException);
@@ -55,7 +57,7 @@ public class PersonController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doGet(request,response);
 	}
 
 }
