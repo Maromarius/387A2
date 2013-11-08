@@ -22,7 +22,7 @@
 			<th>Modify</th>
 		</tr>
 	    <%
-	 
+	    PersonController controller = new PersonController();
 	    PeopleContainer container = (PeopleContainer) session.getAttribute("currentpersonList");
 	    ArrayList<Person> personList = container.GetPersonList();
 	    
@@ -30,8 +30,8 @@
 	    {
 	    %>
 	        <tr>
-				<td ><%=personList.get(i).getFirstName().toString() %> </td>
-				<td><%=personList.get(i).getLastName().toString() %></td>
+				<td ><%personList.get(i).getFirstName(); %> </td>
+				<td><%personList.get(i).getLastName(); %></td>
 				<td>Edit</td>
 			</tr>
 		<%}%>
