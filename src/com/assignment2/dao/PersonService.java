@@ -4,18 +4,10 @@
  */
 package com.assignment2.dao;
 
-import java.sql.Connection;
-
-import com.assignment2.util.DatabaseConnection;
 import com.assignment2.controller.UnitOfWork;
 import com.assignment2.model.PeopleContainer;
 import com.assignment2.model.Person;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
