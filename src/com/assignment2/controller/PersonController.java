@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.assignment2.dao.PersonService;
-import com.assignment2.model.PeopleContainer;
-import com.assignment2.model.Person;
 
 /**
  * Servlet implementation class PersonController
