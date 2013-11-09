@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.assignment2.controller.PersonController"%>
 <%@page import="com.assignment2.controller.UnitOfWork"%>
 <%@page import="com.assignment2.dao.PersonService"%>
@@ -12,7 +11,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Insert title here</title>
+		<title>People List</title>
 	</head>
 	
 <body>
@@ -31,9 +30,9 @@
 	    {
 	    	String isDirty = "";
 	    	if(UnitOfWork.GetInstance().ContainsKey(personList.get(i).getpId()))
-	    			{
-	    				isDirty = "*";
-	    			}
+    			{
+    				isDirty = "*";
+    			}
 	    %>
 	        <tr>
 				<td ><%=isDirty+personList.get(i).getFirstName() %> </td>

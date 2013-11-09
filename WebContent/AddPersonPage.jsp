@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Person</title>
 </head>
 <body>
 <center>
@@ -20,7 +20,7 @@
 	    <form action="DoSave" method="get">
 	        <tr>
 				<td>
-					<input type="hidden" name="personID" value=<%=PersonService.getInstance().getNextPId() %>>></input>
+					<input type="hidden" name="personID" value=<%=PersonService.getInstance().getNextPId() %>></input>
 					<input type="text" name="firstName" ></input>
 				</td>
 				<td>

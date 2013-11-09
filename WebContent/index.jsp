@@ -8,11 +8,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Main Page</title>
+	<title>Welcome</title>
 </head>
 <body>
 	<center>
-		<h1>Welcome to the Assignment 2</h1>
+		<h1>Welcome to Assignment 2</h1>
 			<br/>
 	            <form action="PersonController" method="get">
 	                <input type="submit" value="Submit">
