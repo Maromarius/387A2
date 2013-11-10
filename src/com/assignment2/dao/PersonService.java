@@ -5,8 +5,10 @@
 package com.assignment2.dao;
 
 import com.assignment2.controller.UnitOfWork;
+import com.assignment2.model.IdentityMap;
 import com.assignment2.model.PeopleContainer;
 import com.assignment2.model.Person;
+
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class PersonService 
 {
 	private static PersonService instance;
+	private static IdentityMap identityMap;
 	private PeopleContainer peopleContainer;
 	private int NextPId;
 	

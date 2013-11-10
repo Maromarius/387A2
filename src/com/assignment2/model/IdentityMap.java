@@ -3,7 +3,7 @@ package com.assignment2.model;
 import java.util.ArrayList;
 
 
-public class IdentityMap {
+public class  IdentityMap {
 
 	private ArrayList personId = new ArrayList();
 	

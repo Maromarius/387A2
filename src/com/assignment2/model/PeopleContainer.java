@@ -13,9 +13,6 @@ import java.util.HashMap;
  * @author Philip
  */
 public class PeopleContainer {
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
     
 	private ArrayList<Integer> pIds;
     private HashMap<Integer,Person> peopleList;
@@ -28,8 +25,11 @@ public class PeopleContainer {
     
     public void AddPerson(Person p)
     {
-    	pIds.add(p.getpId());
-        peopleList.put(p.getpId(), p);
+    	if(verifyIntegrity(p.getpId())){
+    		pIds.add(p.getpId());
+            peopleList.put(p.getpId(), p);
+    	}
+    
     }
     
     public Person GetPerson(int pid)
@@ -78,5 +78,16 @@ public class PeopleContainer {
     {
         return peopleList;
     }
+    
+    public boolean verifyIntegrity(int id)
+	{
+		
+		if(!pIds.contains(id))
+		{ 
+			//pIds.add(id);
+			return true;
+		}	
+		return false;
+	}
 
 }
