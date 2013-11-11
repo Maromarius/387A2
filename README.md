@@ -9,8 +9,11 @@ Import:
 In the WAR file input tab, click 'Browse' & select the .war file in this submission folder. Click 'Finish'.
 
 Setup:
-
-3) In the encs.properties file in the src folder, enter your encs username next to 'encs_username=' without any quotations (ex. encs_username=j_doe). Do the same for your password next to 'encs_password=', then save your changes.
+3) Right click on 'src' -> New -> File -> 'File name:' enter 'encs.properties' -> Finish
+	Then enter the following in the encs.properties file:
+	encs_username=YOUR ENCS USER NAME HERE (Without quotations)
+	encs_password=YOUR ENCS PASSWORD HERE (Without quotations)
+	Save your changes.
 
 Run: 
 
