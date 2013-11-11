@@ -39,12 +39,12 @@ public class PersonService
         return instance;
     }
     
-    public PeopleContainer getContainer()
+    /*public PeopleContainer getContainer()
     {
     	return peopleContainer;
-    }
+    }*/
     
-    public boolean PersonExists(Person p)
+    public boolean personExists(Person p)
     {
     	return peopleContainer.GetPersonMap().containsKey(p.getpId());
     }
@@ -56,6 +56,7 @@ public class PersonService
     
     public PeopleContainer getAllFirstLastNamesIds()
     {  
+    	//call to database
     	peopleContainer = new PeopleContainer();
     	ArrayList<String> firstNames = new ArrayList<String>();
     	ArrayList<String> lastNames = new ArrayList<String>();
@@ -71,7 +72,7 @@ public class PersonService
                 person.setFirstName(firstNames.get(i));
                 person.setLastName(lastNames.get(i));
                 person.setpId(ids.get(i));
-                peopleContainer.AddPerson(person);
+                peopleContainer.addPerson(person);
             }
         }
         return peopleContainer;
@@ -79,6 +80,7 @@ public class PersonService
     
     public Person getAllPersonInfo(int pid)
     {
+    	//call to database
     	Person person = peopleContainer.GetPersonMap().get(pid);
     	
         String[] personInfo = dao.getPersonbyId(pid);
@@ -91,17 +93,42 @@ public class PersonService
         return person;
     }
     
+    public Person getExistingPerson(int pid)
+    {
+    	return peopleContainer.getPerson(pid);
+    }
+    
+    public boolean createPerson(Person p)
+    {
+    	UnitOfWork.GetInstance().registerNew(p.getpId());
+    	peopleContainer.addPerson(p);
+    	
+    	return true;
+    }
+    
     public boolean updatePerson(Person p)
     {
     	UnitOfWork.GetInstance().registerDirty(p.getpId());
-    	peopleContainer.UpdatePerson(p);
-        //return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	peopleContainer.updatePerson(p);
+        return true;
+    }
+    
+    public boolean deletePerson(int pid)
+    {
+    	UnitOfWork.GetInstance().registerRemoved(pid);
+    	peopleContainer.removePerson(pid);
     	return true;
+    }
+
+    public boolean createPersonDAO(int pid)
+    {
+    	Person p = peopleContainer.getPerson(pid);
+    	return dao.addPerson(p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
     public boolean updatePersonDAO(int pid)
     {
-    	Person p = this.getContainer().GetPerson(pid);
+    	Person p = peopleContainer.getPerson(pid);
     	return dao.updatePerson(p.getpId(),p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
     }
     
@@ -110,25 +137,13 @@ public class PersonService
     	return dao.deletePerson(pid);
     }
     
-    public boolean deletePerson(int pid)
+    public boolean isEmpty()
     {
-    	UnitOfWork.GetInstance().registerRemoved(pid);
-    	peopleContainer.RemovePerson(pid);
-    	return true;
-    }
-
-    public boolean createPersonDAO(int pid)
-    {
-    	Person p = this.getContainer().GetPerson(pid);
-    	return dao.addPerson(p.getFirstName(),p.getLastName(),p.getPhoneNumber(),p.getAddress());
+    	return peopleContainer.GetSize() == 0;
     }
     
-    public boolean createPerson(Person p)
+    public ArrayList<Person> getAllExistingPeople()
     {
-    	UnitOfWork.GetInstance().registerNew(p.getpId());
-    	peopleContainer.AddPerson(p);
-    	
-    	return true;
+    	return peopleContainer.getPersonList();
     }
-    
 }

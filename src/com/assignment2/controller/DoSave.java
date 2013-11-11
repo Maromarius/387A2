@@ -30,7 +30,7 @@ public class DoSave extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pId = (int) Integer.parseInt(request.getParameter("personID").toString());
-		Person oldPerson = PersonService.getInstance().getContainer().GetPerson(pId);
+		Person oldPerson = PersonService.getInstance().getExistingPerson(pId);
 		String fName = request.getParameter("firstName");
 		String lName = request.getParameter("lastName");
 		String address = request.getParameter("address");
@@ -41,10 +41,10 @@ public class DoSave extends HttpServlet {
 			//PersonNon existing, create new one
 			PersonService.getInstance().createPerson(p);
 		}
-		else if(!oldPerson.IsEqual(p))
+		else if(!oldPerson.isEqual(p))
 		{
 			//person info modified, or created
-			if(PersonService.getInstance().PersonExists(p))
+			if(PersonService.getInstance().personExists(p))
 			{
 				PersonService.getInstance().updatePerson(p);
 			}

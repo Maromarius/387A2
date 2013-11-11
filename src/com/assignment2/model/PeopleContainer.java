@@ -23,7 +23,7 @@ public class PeopleContainer {
         peopleList = new HashMap<Integer,Person>();
     }
     
-    public void AddPerson(Person p)
+    public void addPerson(Person p)
     {
     	if(verifyIntegrity(p.getpId())){
     		pIds.add(p.getpId());
@@ -32,12 +32,12 @@ public class PeopleContainer {
     
     }
     
-    public Person GetPerson(int pid)
+    public Person getPerson(int pid)
     {
         return peopleList.get(pid);
     }
     
-    public boolean RemovePerson(int pid)
+    public boolean removePerson(int pid)
     {
     	if(peopleList.containsKey(pid))
     	{
@@ -54,12 +54,12 @@ public class PeopleContainer {
     	return false;
     }
     
-    public void UpdatePerson(Person p)
+    public void updatePerson(Person p)
     {
         peopleList.put(p.getpId(), p);
     }
     
-    public ArrayList<Person> GetPersonList()
+    public ArrayList<Person> getPersonList()
     {
     	ArrayList<Person> people = new ArrayList<Person>();
     	for(int i = 0; i < pIds.size();i++)

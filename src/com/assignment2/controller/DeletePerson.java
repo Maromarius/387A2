@@ -30,7 +30,7 @@ public class DeletePerson extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pId = (int) Integer.parseInt(request.getParameter("personID").toString());
-		PersonService.getInstance().getContainer().RemovePerson(pId);
+		PersonService.getInstance().deletePerson(pId);
 		response.sendRedirect("PersonController");
 	}
 

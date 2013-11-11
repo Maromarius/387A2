@@ -33,7 +33,7 @@ public class EditPersonInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		int pId = (int) Integer.parseInt(request.getParameter("personID").toString());
-		Person p = PersonService.getInstance().getContainer().GetPerson(pId);
+		Person p = PersonService.getInstance().getExistingPerson(pId);
 		
 		if(!p.isLazyLoaded())
 		{

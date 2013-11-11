@@ -37,7 +37,7 @@ public class PersonController extends HttpServlet {
 
 			HttpSession session = request.getSession(true);
 			
-			if(PersonService.getInstance().getContainer().GetSize() == 0)
+			if(PersonService.getInstance().isEmpty())
 			{
 				//Get initial information from database, get's called once.
 				session.setAttribute("currentpersonList",PersonService.getInstance().getAllFirstLastNamesIds());

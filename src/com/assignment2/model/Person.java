@@ -8,6 +8,7 @@ public class Person {
 	    private String address;
 	    private String phoneNumber;
 	    private boolean lazyLoaded;
+	    private boolean isStoredInDatabase;
 
 	    public Person()
 	    {
@@ -20,8 +21,7 @@ public class Person {
 	    }
 	    public Person(int pid, String firstname, String lastname, String addr, String phonenumber, boolean lazyloaded)
 	    {
-	    	lazyLoaded = false;
-	        firstName =firstname;
+	        firstName = firstname;
 	        lastName = lastname;
 	        phoneNumber = phonenumber;
 	        address = addr;
@@ -33,82 +33,94 @@ public class Person {
 	    /**
 	     * @return the pId
 	     */
-	    public int getpId() {
+	    public int getpId() 
+	    {
 	        return pId;
 	    }
 
 	    /**
 	     * @param pId the pId to set
 	     */
-	    public void setpId(int pId) {
+	    public void setpId(int pId) 
+	    {
 	        this.pId = pId;
 	    }
 
 	    /**
 	     * @return the firstName
 	     */
-	    public String getFirstName() {
+	    public String getFirstName() 
+	    {
 	        return firstName;
 	    }
 
 	    /**
 	     * @param firstName the firstName to set
 	     */
-	    public void setFirstName(String firstName) {
+	    public void setFirstName(String firstName) 
+	    {
 	        this.firstName = firstName;
 	    }
 
 	    /**
 	     * @return the lastName
 	     */
-	    public String getLastName() {
+	    public String getLastName() 
+	    {
 	        return lastName;
 	    }
 
 	    /**
 	     * @param lastName the lastName to set
 	     */
-	    public void setLastName(String lastName) {
+	    public void setLastName(String lastName) 
+	    {
 	        this.lastName = lastName;
 	    }
 
 	    /**
 	     * @return the address
 	     */
-	    public String getAddress() {
+	    public String getAddress() 
+	    {
 	        return address;
 	    }
 
 	    /**
 	     * @param address the address to set
 	     */
-	    public void setAddress(String address) {
+	    public void setAddress(String address) 
+	    {
 	        this.address = address;
 	    }
 
 	    /**
 	     * @return the phoneNumber
 	     */
-	    public String getPhoneNumber() {
+	    public String getPhoneNumber() 
+	    {
 	        return phoneNumber;
 	    }
 
 	    /**
 	     * @param phoneNumber the phoneNumber to set
 	     */
-	    public void setPhoneNumber(String phoneNumber) {
+	    public void setPhoneNumber(String phoneNumber) 
+	    {
 	        this.phoneNumber = phoneNumber;
 	    }
+	    
 	    public void setLazyLoaded()
 	    {
 	    	lazyLoaded = true;
 	    }
+	    
 	    public boolean isLazyLoaded()
 	    {
 	    	return lazyLoaded;
 	    }
 	    
-	    public boolean IsEqual(Person p)
+	    public boolean isEqual(Person p)
 	    {
 	    	return (this.address.equals(p.getAddress()) && this.phoneNumber.equals(p.getPhoneNumber()) && this.firstName.equals(p.getFirstName()) && this.lastName.equals(p.getLastName()) && this.pId == p.getpId());
 	    }

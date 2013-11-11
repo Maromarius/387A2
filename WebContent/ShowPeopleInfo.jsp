@@ -23,16 +23,15 @@
 			<th colspan="2" >Modify</th>
 		</tr>
 	    <%
-	    PeopleContainer container = PersonService.getInstance().getContainer();
-	    ArrayList<Person> personList = container.GetPersonList();
-	    
-	    for(int i = 0; i < personList.size(); i++)
-	    {
-	    	String isDirty = "";
-	    	if(UnitOfWork.GetInstance().ContainsKey(personList.get(i).getpId()))
-    			{
-    				isDirty = "*";
-    			}
+	    	    ArrayList<Person> personList = PersonService.getInstance().getAllExistingPeople();
+	    	    
+	    	    for(int i = 0; i < personList.size(); i++)
+	    	    {
+	    	    	String isDirty = "";
+	    	    	if(UnitOfWork.GetInstance().containsKey(personList.get(i).getpId()))
+	        			{
+	        				isDirty = "*";
+	        			}
 	    %>
 	        <tr>
 				<td ><%=isDirty+personList.get(i).getFirstName() %> </td>

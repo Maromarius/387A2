@@ -21,7 +21,7 @@ public class UnitOfWork {
 		return UOW;
 	}
 	
-	public boolean ContainsKey(int pid)
+	public boolean containsKey(int pid)
 	{
 		return info.containsKey(pid);
 	}
