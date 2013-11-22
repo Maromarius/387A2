@@ -15,4 +15,9 @@ public class IdentityMap
 	{
 		people.put(id, p);
 	}
+	
+	public Person removePerson(int id)
+	{
+		return people.remove(id); // returns null if not found
+	}
 }
